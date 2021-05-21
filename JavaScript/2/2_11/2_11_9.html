@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+let login = prompt('Login:')
+let password
+
+function passwordCheck() {
+    password = prompt('Password:')
+    if (password === 'Я Главный') {
+        alert('Здраствуйте')
+    } else if ( password === null || password === '') {
+        alert('Отменено')
+    } else {
+        alert('Неверный пароль')
+    }
+}
+
+if ( login === 'Админ' ) {
+    passwordCheck()
+} else if ( login === null || login === '' ) {
+    alert('Отменено')
+} else {
+    alert('Я вас не знаю')
+}
+</script>
+</html>

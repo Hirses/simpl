@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function checkSpam(str) {
+    let lowerStr = str.toLowerCase()
+    if (lowerStr.includes('viagra') || lowerStr.includes('xxx')) {
+      return true
+    }
+    return false
+  }
+
+  alert( checkSpam('buy ViAgRA now') )
+  alert( checkSpam('free xxxxxx') )
+  alert( checkSpam('innocent rabbit') )
+</script>
+</html>

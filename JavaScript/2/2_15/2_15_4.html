@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    function pow(x, n) {
+        let result = x
+
+        for (let i = 1; i < n; i++) {
+            result *= x
+        }
+
+        return result
+    }
+
+    let x = prompt('Введите число')
+    let n = prompt('ВВедите степень')
+
+    alert(pow(x, n))
+</script>
+</html>
