@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    function Calculator() {
+        this.methods = {
+            '-': (a, b) => a - b,
+            '+': (a, b) => a + b
+        }
+
+        this.calculate = function (str) {
+            let split = str.split(' ')
+
+            let a = +split[0]
+            let op = split[1]
+            let b = +split[2]
+
+            if (!this.methods[op] || isNaN(a) || isNaN(b)) return NaN
+
+            return this.methods[op](a, b)
+        }
+
+        this.addNewMethod = function(name, func) {
+            this.methods[name] = func
+        }
+    }
+
+    let calc = new Calculator
+
+    calc.addNewMethod('*', (a, b) => a * b)
+    calc.addNewMethod('/', (a, b) => a / b)
+    calc.addNewMethod('**', (a, b) => a ** b)
+
+    console.log(calc)
+    console.log(calc.calculate('4 * 5'))
+
+
+</script>
+</html>

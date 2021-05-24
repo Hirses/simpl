@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    let vasya = { name: 'Вася', surname: 'Пупкин', age: 25, id: 1 }
+    let petya = { name: 'Петя', surname: 'Иванова', age: 20, id: 2 }
+    let masha = { name: 'Маша', surname: 'Петрова', age: 28, id: 3 }
+
+    let users = [ vasya, petya, masha ]
+
+    let usersMapped = users.map(item => ({fullName: `${item.name} ${item.surname}`, id: item.id}))
+
+    console.log( usersMapped)
+</script>
+</html>

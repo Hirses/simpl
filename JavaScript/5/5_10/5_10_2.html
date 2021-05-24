@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function topSalary(salaries) {
+    let max = 0
+    let maxName = null
+
+    for (const [name, salary] of Object.entries(salaries)) {
+      if (max < salary) {
+        max = salary
+        maxName = name
+      }
+    }
+
+    return maxName
+  }
+
+  let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+
+  console.log( topSalary(salaries) )
+</script>
+</html>
