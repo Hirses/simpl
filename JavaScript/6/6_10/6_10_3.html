@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  'use strict'
+  function sayHi() {
+    console.log( this.name )
+  }
+
+  sayHi.test = 5
+
+  let bound = sayHi.bind({
+    name: 'Вася'
+  })
+
+  console.log( bound.test )
+</script>
+</html>

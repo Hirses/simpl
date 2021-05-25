@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function f() {
+    console.log('Hello')
+  }
+
+  f.defer(1000)
+
+  Function.prototype.defer = function(ms) {
+    setTimeout(this, ms)
+  }
+
+</script>
+</html>

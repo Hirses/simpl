@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  delay(3000).then(() => console.log('выполнилось за 3 секунды'))
+</script>
+</html>

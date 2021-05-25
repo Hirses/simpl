@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function inBetween(a, b) {
+    return function(x) {
+      return x >= a && x <= b
+    }
+  }
+
+  function inArray(arr) {
+    return function(x) {
+      return arr.includes(x)
+    }
+  }
+</script>
+</html>

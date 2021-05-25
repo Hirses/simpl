@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  function sum(a) {
+    let x = a
+    return function(b) {
+      return x + b
+    }
+  }
+
+  console.log( sum(1)(2) )
+  console.log( sum(5)(-1) )
+</script>
+</html>
