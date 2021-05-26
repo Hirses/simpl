@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  class HttpError extends Error {
+    constructor(response) {
+      super(`${response.status} for ${response.uri}`)
+      this.name = 'HttpError'
+      this.response = response
+    }
+  }
+
+  async function loadJson(uri) {
+    let response = await fetch(uri)
+
+    if (response.status == 200) {
+      return response.json()
+    } else {
+      throw new HttpError(response)
+    }
+  }
+
+  async function demoGithubUser() {
+    let user
+
+    while(true) {
+      let name = prompt("Введите логин?", "iliakan")
+
+      try {
+        user = await loadJson(`https://api.github.com/users/${name}`)
+        break
+      } catch(err) {
+        if (err instanceof HttpError && err.response.status == 404) {
+          alert("Такого пользователя не существует, пожалуйста, повторите ввод.")
+        } else {
+          throw err
+        }
+      }
+    }
+    alert(`Полное имя: ${user.name}`)
+    return user
+  }
+
+  demoGithubUser()
+
+
+</script>
+</html>

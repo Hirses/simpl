@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  let user = {
+    name: 'John'
+  };
+
+  function wrap(target) {
+    return new Proxy(target, {
+      get(target, prop, receiver) {
+        if (prop in target) {
+          return Reflect.get(target, prop, receiver)
+        } else {
+          throw new ReferenceError(`Свойсвто не существует: ${prop}`)
+        }
+      }
+    })
+  }
+
+  user = wrap(user)
+
+  console.log(user.name)
+  console.log(user.age)
+</script>
+</html>
