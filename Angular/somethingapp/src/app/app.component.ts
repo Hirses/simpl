@@ -1,11 +1,21 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
 
 @Component({
   selector: 'my-app',
-  template: `<child-component></child-component>
-            <p>Привет {{name}}</p>`,
-  styles: [`h2, p {color:#333}`]
+  template: `<p #nameText>{{name}}</p>
+  <p>{{nameText.textContent}}</p>
+  <button (click)="change()">Изменить</button>`,
 })
 export class AppComponent {
-  name = 'Петр'
+  @ViewChild("nameText", {static: false})
+  nameParagraph: ElementRef | undefined
+
+  name: string = "Tom";
+
+  change() {
+    if (this.nameParagraph !== undefined) {
+      console.log(this.nameParagraph.nativeElement.textContent);
+      this.nameParagraph.nativeElement.textContent = 'hell';
+    }
+  }
 }

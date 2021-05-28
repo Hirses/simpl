@@ -2,9 +2,10 @@ import {Component} from "@angular/core";
 
 @Component({
   selector: 'child-component',
-  template: `<h2>Добро пожаловать {{name}}!</h2>`,
-  styles: [`h2, p {color: red;}`]
+  template: `<p>{{counter}}</p>`,
 })
 export class  ChildComponent {
-  name = 'Евгений'
+  counter: number = 0;
+  increment() { this.counter++ }
+  decrement() { this.counter-- }
 }
