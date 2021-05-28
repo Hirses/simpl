@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {DataService} from "./data.service";
+import {LogService} from "./log.service";
 
 @Component({
   selector: 'my-app',
@@ -14,7 +15,7 @@ import {DataService} from "./data.service";
                   </tr>
                 </table>
             </div>`,
-  providers: [DataService]
+  providers: [DataService, LogService]
 })
 export class AppComponent {
   items: string[] = [];
