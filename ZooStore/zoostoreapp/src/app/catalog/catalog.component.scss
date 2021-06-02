@@ -1,0 +1,36 @@
+.catalog {
+  padding: 40px 0 40px 0;
+  min-height: 100vh;
+}
+
+.catalog__title {
+  font-size: 36px;
+  text-align: center;
+}
+
+.catalog__control {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 40px;
+  padding: 0 60px;
+}
+
+.catalog__search {
+  width: 300px;
+}
+
+.catalog__grid {
+  padding: 60px;
+}
+
+.catalog__card {
+  margin: 0 auto;
+  background-color: blue;
+  width: 200px;
+  height: 200px;
+}
+
+nz-form-item {
+  margin: 15px;
+}
