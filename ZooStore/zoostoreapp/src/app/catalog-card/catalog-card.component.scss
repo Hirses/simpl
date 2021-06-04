@@ -1,0 +1,20 @@
+.catalog__card {
+  height: 250px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &_green {
+    background-color: white;
+  }
+}
+
+.catalog__cardName {
+  font-size: 22px;
+}
+
+.catalog__cardBtnMB{
+  margin-bottom: 10px;
+}

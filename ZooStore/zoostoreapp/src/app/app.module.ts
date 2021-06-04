@@ -2,12 +2,12 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {AppComponent} from "./app.component";
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { ru_RU } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import {NZ_I18N} from 'ng-zorro-antd/i18n';
+import {ru_RU} from 'ng-zorro-antd/i18n';
+import {registerLocaleData} from '@angular/common';
 import ru from '@angular/common/locales/ru';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {NzMenuModule} from "ng-zorro-antd/menu";
 import {HeaderComponent} from "./header/header.component";
@@ -23,10 +23,11 @@ import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {CatalogCardComponent} from "./catalog-card/catalog-card.component";
 
 registerLocaleData(ru);
 
-const appRoutes : Routes = [
+const appRoutes: Routes = [
   {path: '', component: MainComponent},
   {path: 'catalog', component: CatalogComponent},
   {path: 'order-list', component: OrderListComponent},
@@ -34,8 +35,9 @@ const appRoutes : Routes = [
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NzLayoutModule, NzMenuModule, NzButtonModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, NzTabsModule, RouterModule.forRoot(appRoutes)],
-  declarations: [AppComponent,HeaderComponent, MainComponent, CatalogComponent, FooterComponent],
+  declarations: [AppComponent, HeaderComponent, MainComponent, CatalogComponent, CatalogCardComponent, FooterComponent],
   bootstrap: [AppComponent],
-  providers: [{ provide: NZ_I18N, useValue: ru_RU }]
+  providers: [{provide: NZ_I18N, useValue: ru_RU}]
 })
-export class AppModule { }
+export class AppModule {
+}

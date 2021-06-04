@@ -4,17 +4,18 @@ import {Pet} from "./pet";
 
 @Injectable()
 export class HttpService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  postPet(pet : Pet) {
+  postPet(pet: Pet) {
     return this.http.post('https://petstore.swagger.io/v2/pet', pet);
   }
 
-  getPetByStatus(status : string) {
+  getPetByStatus(status: string) {
     return this.http.get(`https://petstore.swagger.io/v2/pet/findByStatus?status=${status}`);
   }
 
-  deletePet(id : number) {
+  deletePet(id: number) {
     return this.http.delete(`https://petstore.swagger.io/v2/pet/${id}`);
   }
 }

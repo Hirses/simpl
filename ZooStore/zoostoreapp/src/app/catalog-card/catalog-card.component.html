@@ -1,0 +1,10 @@
+<div class="catalog__card catalog__card_green">
+  <div class="catalog__cardName">{{name | slice:0 :8}}</div>
+  <div>id: {{id}}</div>
+  <div class >
+    <button nz-button nzType="default" class="catalog__cardBtnMB">Заказать</button>
+    <button nz-button nzType="default" class="catalog__cardBtnMB">Изменить</button>
+    <button nz-button nzType="default" (click)="deletePet(id)">Удалить</button>
+  </div>
+</div>
+
