@@ -22,17 +22,18 @@ import {FooterComponent} from "./footer/footer.component";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
 
 registerLocaleData(ru);
 
 const appRoutes : Routes = [
   {path: '', component: MainComponent},
   {path: 'catalog', component: CatalogComponent},
-  {path: 'order-list', component: OrderListComponent}
+  {path: 'order-list', component: OrderListComponent},
 ]
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NzLayoutModule, NzMenuModule, NzButtonModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, RouterModule.forRoot(appRoutes)],
+  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NzLayoutModule, NzMenuModule, NzButtonModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, NzTabsModule, RouterModule.forRoot(appRoutes)],
   declarations: [AppComponent,HeaderComponent, MainComponent, CatalogComponent, FooterComponent],
   bootstrap: [AppComponent],
   providers: [{ provide: NZ_I18N, useValue: ru_RU }]

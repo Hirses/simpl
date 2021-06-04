@@ -2,62 +2,121 @@
   <h2 class="catalog__title">Каталог</h2>
   <div class="catalog__control">
     <button nz-button nzType="default" (click)="showModal()">Добавить животное</button>
-    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" class="catalog__search">
-      <input type="text" nz-input placeholder="Найти животное"  />
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" class="catalog__search" >
+      <input type="text" nz-input placeholder="Найти животное" [(ngModel)]="searchInputValue"/>
       <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        <button nz-button nzType="primary" (click)="searchPet(searchInputValue)"><i nz-icon nzType="search"></i></button>
       </ng-template>
     </nz-input-group>
   </div>
-  <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
-    <div nz-col class="gutter-row" [nzSpan]="4"><div class="catalog__card"></div></div>
+  <div class="catalog__tabs">
+    <nz-tabset [nzCentered]="true" [nzTabPosition]="'left'">
+      <nz-tab nzTitle="В продаже">
+        <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
+          <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of availablePets">
+            <div class="catalog__card catalog__card_green">
+              <div class="catalog__cardName">{{item.name | slice: 0: 8}}</div>
+              <div>id: {{item.id}}</div>
+              <div>
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Заказать</button>
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Изменить</button>
+                <button nz-button nzType="default">Удалить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="В ожидании">
+        <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
+          <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of pendingPets">
+            <div class="catalog__card catalog__card_green">
+              <div class="catalog__cardName">{{item.name | slice:0:8}}</div>
+              <div>id: {{item.id}}</div>
+              <div class >
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Заказать</button>
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Изменить</button>
+                <button nz-button nzType="default" >Удалить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="Продано">
+        <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
+          <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of soldPets">
+            <div class="catalog__card catalog__card_green">
+              <div class="catalog__cardName">{{item.name | slice:0 :8}}</div>
+              <div>id: {{item.id}}</div>
+              <div class >
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Заказать</button>
+                <button nz-button nzType="default" class="catalog__cardBtnMB">Изменить</button>
+                <button nz-button nzType="default" >Удалить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
   </div>
-  <nz-modal [(nzVisible)]="isModalOpen" nzTitle="Добавить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+  <nz-modal [(nzVisible)]="isAddModalOpen" nzTitle="Добавить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
     <ng-container *nzModalContent>
       <form nz-form>
         <h3>Основная информация</h3>
         <nz-form-item>
           <nz-form-label [nzSpan]="6">ID:</nz-form-label>
           <nz-form-control [nzSpan]="14">
-            <input nz-input type="number" required="" [(ngModel)]="creatingPet.id">
+            <input nz-input type="number" required="" name="id" [(ngModel)]="creatingPet.id">
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzSpan]="6" nzFor="name">Имя:</nz-form-label>
+          <nz-form-label [nzSpan]="6">Имя:</nz-form-label>
           <nz-form-control [nzSpan]="14">
-            <input nz-input nz-input-name="name" type="text" required="" [(ngModel)]="creatingPet.name">
+            <input nz-input type="text" required="" name="name" [(ngModel)]="creatingPet.name">
           </nz-form-control>
         </nz-form-item>
         <h3>Категория</h3>
         <nz-form-item>
-          <nz-form-label [nzSpan]="6" nzFor="category.id">ID:</nz-form-label>
+          <nz-form-label [nzSpan]="6">ID:</nz-form-label>
           <nz-form-control [nzSpan]="14">
-            <input nz-input nz-input-name="category.id" type="number" required="" [(ngModel)]="creatingPet.category.id">
+            <input nz-input type="number" required="" name="category-id" [(ngModel)]="creatingPet.category.id">
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzSpan]="6" nzFor="category.name">Категория:</nz-form-label>
+          <nz-form-label [nzSpan]="6">Категория:</nz-form-label>
           <nz-form-control [nzSpan]="14">
-            <input nz-input nz-input-name="category.name" type="text" required="" [(ngModel)]="creatingPet.category.name">
+            <input nz-input type="text" required="" name="category-name" [(ngModel)]="creatingPet.category.name">
           </nz-form-control>
         </nz-form-item>
         <h3>Статус</h3>
         <nz-form-item>
-          <nz-form-label [nzSpan]="6" nzFor="status">Статус:</nz-form-label>
-          <nz-select [nzPlaceHolder]="'В наличии'" [(ngModel)]="creatingPet.status">
+          <nz-form-label [nzSpan]="6">Статус:</nz-form-label>
+          <nz-select [nzPlaceHolder]="'В наличии'" name="status" [(ngModel)]="creatingPet.status">
             <nz-option nzValue="available" nzLabel="В наличии"></nz-option>
             <nz-option nzValue="pending" nzLabel="В ожидании"></nz-option>
             <nz-option nzValue="sold" nzLabel="Продано"></nz-option>
           </nz-select>
         </nz-form-item>
+        <button nz-button nzType="primary" (click)="submit(creatingPet)" class="catalog__btn">Добавить</button>
       </form>
+    </ng-container>
+    <div *nzModalFooter></div>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isSearchModalOpen" nzTitle="Результаты поиска" (nzOnCancel)="closeModal()" nzOkLoading="false">
+    <ng-container *nzModalContent>
+      <div *ngIf="isFoundPets">Я ничего не нашел</div>
+      <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
+        <div nz-col class="gutter-row" [nzSpan]="10" *ngFor="let item of foundPets">
+          <div class="catalog__card catalog__card_green">
+            <div class="catalog__cardName">{{item.name | slice:0 :8}}</div>
+            <div>Статус: {{item.status}}</div>
+            <div class >
+              <button nz-button nzType="default" class="catalog__cardBtnMB">Заказать</button>
+              <button nz-button nzType="default" class="catalog__cardBtnMB">Изменить</button>
+              <button nz-button nzType="default">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </ng-container>
     <div *nzModalFooter></div>
   </nz-modal>
