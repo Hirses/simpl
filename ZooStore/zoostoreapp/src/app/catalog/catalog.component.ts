@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Pet} from "../pet";
 import {HttpService} from "../http.service";
 
@@ -10,13 +10,15 @@ import {HttpService} from "../http.service";
 })
 export class CatalogComponent implements OnInit{
   creatingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '')
+  changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '')
   public isAddModalOpen: boolean = false;
   public isSearchModalOpen: boolean = false;
+  public isChangeModalOpen: boolean = false;
   public donePostPet: boolean = false;
   public foundPets: Pet[] = [];
-  @Output() availablePets: Pet[] | any;
-  @Output() pendingPets: Pet[] | any;
-  @Output() soldPets: Pet[] | any;
+  availablePets: Pet[] | any;
+  pendingPets: Pet[] | any;
+  soldPets: Pet[] | any;
   public searchInputValue: string = '';
   public isFoundPets: boolean = false;
 
@@ -30,6 +32,7 @@ export class CatalogComponent implements OnInit{
   closeModal() {
     this.isAddModalOpen = false;
     this.isSearchModalOpen = false;
+    this.isChangeModalOpen = false;
   }
 
   submit(pet: Pet) {
@@ -50,10 +53,9 @@ export class CatalogComponent implements OnInit{
 
       try {
         let concatPets: Pet[] = this.foundPets = this.availablePets.concat(this.pendingPets).concat(this.soldPets);
-        this.foundPets = concatPets.filter(pet => (typeof pet.name === 'string') && (pet.name !== '') && (pet.name.toUpperCase().indexOf(word.toUpperCase()) > -1));
+        this.foundPets = concatPets.filter(pet => (typeof pet.name === 'string') && (pet.name.toUpperCase().indexOf(word.toUpperCase()) > -1));
       } catch (err) {
-        console.log(`something wrong...
-        ${err}`);
+        console.log(`something wrong...( ${err} )`);
       }
 
     }
@@ -79,6 +81,14 @@ export class CatalogComponent implements OnInit{
 
   ngOnInit() {
     this.reloadCatalog()
+  }
+
+  changePet(pet: Pet) {
+    this.changingPet.id = pet.id;
+    this.changingPet.name = pet.name;
+    this.changingPet.status = pet.status;
+    this.isChangeModalOpen = true;
+    console.log(this.changingPet)
   }
 
 }

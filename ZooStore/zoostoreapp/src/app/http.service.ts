@@ -18,4 +18,8 @@ export class HttpService {
   deletePet(id: number) {
     return this.http.delete(`https://petstore.swagger.io/v2/pet/${id}`);
   }
+
+  changePet(id: number, name: string, status: string) {
+   // return this.http.post(`https://petstore.swagger.io/v2/pet/${id}?name=${name}&status=${status}`);
+  }
 }

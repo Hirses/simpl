@@ -14,21 +14,21 @@
       <nz-tab nzTitle="В продаже">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of availablePets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
       <nz-tab nzTitle="В ожидании">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of pendingPets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
       <nz-tab nzTitle="Продано">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of soldPets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
@@ -73,6 +73,35 @@
           </nz-select>
         </nz-form-item>
         <button nz-button nzType="primary" (click)="submit(creatingPet)" class="catalog__btn">Добавить</button>
+      </form>
+    </ng-container>
+    <div *nzModalFooter></div>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isChangeModalOpen" nzTitle="Изменить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+    <ng-container *nzModalContent>
+      <form nz-form>
+        <h3>Основная информация</h3>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6">ID:</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input type="number" required="" name="id" disabled [(ngModel)]="changingPet.id">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6">Имя:</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input type="text" required="" name="name" [(ngModel)]="changingPet.name">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6">Статус:</nz-form-label>
+          <nz-select [nzPlaceHolder]="changingPet.status" name="status" [(ngModel)]="changingPet.status">
+            <nz-option nzValue="available" nzLabel="В наличии"></nz-option>
+            <nz-option nzValue="pending" nzLabel="В ожидании"></nz-option>
+            <nz-option nzValue="sold" nzLabel="Продано"></nz-option>
+          </nz-select>
+        </nz-form-item>
+        <button nz-button nzType="primary" class="catalog__btn">Изменить</button>
       </form>
     </ng-container>
     <div *nzModalFooter></div>
