@@ -78,12 +78,12 @@ export class CatalogComponent implements OnInit{
     this.httpService.getPetByStatus('pending').subscribe(
       (data: any) => this.pendingPets = data,
       error => console.log(error),
-      () => this.availablePets = this.availablePets.filter(pet => pet.id < 9.0071993e+15)
+      () => this.pendingPets = this.pendingPets.filter(pet => pet.id < 9.0071993e+15)
     );
     this.httpService.getPetByStatus('sold').subscribe(
       (data: any) => this.soldPets = data,
       error => console.log(error),
-      () => this.availablePets = this.availablePets.filter(pet => pet.id < 9.0071993e+15)
+      () => this.soldPets = this.soldPets.filter(pet => pet.id < 9.0071993e+15)
     );
   }
 
