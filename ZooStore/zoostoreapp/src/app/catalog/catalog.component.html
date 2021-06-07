@@ -14,21 +14,21 @@
       <nz-tab nzTitle="В продаже">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of availablePets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onChange)="openChangeModal($event)" (onDelete)="openDeleteModal($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
       <nz-tab nzTitle="В ожидании">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of pendingPets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onChange)="openChangeModal($event)" (onDelete)="openDeleteModal($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
       <nz-tab nzTitle="Продано">
         <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
           <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of soldPets">
-            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onClick)="changePet($event)"></app-catalog-card>
+            <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onChange)="openChangeModal($event)" (onDelete)="openDeleteModal($event)"></app-catalog-card>
           </div>
         </div>
       </nz-tab>
@@ -111,7 +111,7 @@
       <div *ngIf="isFoundPets">Я ничего не нашел</div>
       <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
         <div nz-col class="gutter-row" [nzSpan]="10" *ngFor="let item of foundPets">
-          <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status"></app-catalog-card>
+          <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onChange)="openChangeModal($event)" (onDelete)="openDeleteModal($event)"></app-catalog-card>
         </div>
       </div>
     </ng-container>
