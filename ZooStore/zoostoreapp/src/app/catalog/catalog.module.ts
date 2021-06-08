@@ -14,7 +14,7 @@ import {CatalogCardComponent} from "./catalog-card/catalog-card.component";
 import {CatalogListComponent} from "./catalog-list/catalog-list.component";
 import {NZ_I18N, ru_RU} from "ng-zorro-antd/i18n";
 import {NzButtonModule} from "ng-zorro-antd/button";
-import {HttpService} from "../http.service";
+import {PetService} from "../pet.service";
 import {AddPetModalComponent} from "./add-pet-modal/add-pet-modal.component";
 import {ChangePetModalComponent} from "./change-pet-modal/change-pet-modal.component";
 
@@ -22,6 +22,6 @@ import {ChangePetModalComponent} from "./change-pet-modal/change-pet-modal.compo
   imports: [FormsModule, HttpClientModule, BrowserAnimationsModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, NzTabsModule, NzButtonModule, RouterModule],
   declarations: [CatalogComponent, CatalogCardComponent,  CatalogListComponent, AddPetModalComponent, ChangePetModalComponent],
   bootstrap: [CatalogComponent],
-  providers: [{provide: NZ_I18N, useValue: ru_RU}, HttpService]
+  providers: [{provide: NZ_I18N, useValue: ru_RU}, PetService]
 })
 export class CatalogModule { }

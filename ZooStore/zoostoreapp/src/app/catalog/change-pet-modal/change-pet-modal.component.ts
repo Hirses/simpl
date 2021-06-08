@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {HttpService} from "../../http.service";
+import {PetService} from "../../pet.service";
 import {Pet} from "../../pet";
 import {take} from "rxjs/operators";
 
@@ -9,7 +9,7 @@ import {take} from "rxjs/operators";
   templateUrl: 'change-pet-modal.component.html'
 })
 export class ChangePetModalComponent {
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: PetService) {
   }
 
   @Input() changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');

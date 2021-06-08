@@ -6,7 +6,6 @@ import {registerLocaleData} from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import {HeaderComponent} from "./header/header.component";
 import {RouterModule, Routes} from "@angular/router";
-import {NzButtonModule} from "ng-zorro-antd/button";
 import {CatalogComponent} from "./catalog/catalog.component";
 import {OrderListComponent} from "./order-list/order-list.component";
 import {FooterComponent} from "./footer/footer.component";

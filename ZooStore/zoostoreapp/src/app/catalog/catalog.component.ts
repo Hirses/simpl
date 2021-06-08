@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Pet} from "../pet";
-import {HttpService} from "../http.service";
+import {PetService} from "../pet.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {take} from "rxjs/operators";
 
@@ -8,7 +8,7 @@ import {take} from "rxjs/operators";
   selector: 'app-catalog',
   styleUrls: ['catalog.component.scss'],
   templateUrl: 'catalog.component.html',
-  providers: [HttpService, NzModalService]
+  providers: [PetService, NzModalService]
 })
 export class CatalogComponent implements OnInit{
   public changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
@@ -21,7 +21,7 @@ export class CatalogComponent implements OnInit{
   public soldPets: Pet[]  = [];
   public searchInputValue: string = '';
 
-  constructor(private httpService: HttpService, private modal: NzModalService) {
+  constructor(private httpService: PetService, private modal: NzModalService) {
   }
 
   public showModal(): void {
@@ -84,5 +84,5 @@ export class CatalogComponent implements OnInit{
   private deletePet(id: number): void {
     this.httpService.deletePet(id).subscribe(() => this.reloadCatalog(),(error) => console.log(error))
   }
-  
+
 }

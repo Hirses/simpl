@@ -4,7 +4,7 @@ import {Pet} from "./pet";
 import {Observable} from "rxjs";
 
 @Injectable()
-export class HttpService {
+export class PetService {
   private url: string = 'https://petstore.swagger.io/v2';
   private controller: string = `${this.url}/pet`
 
