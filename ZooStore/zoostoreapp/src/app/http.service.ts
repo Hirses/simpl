@@ -1,25 +1,24 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Pet} from "./pet";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class HttpService {
+  private url: string = 'https://petstore.swagger.io/v2';
+  private controller: string = `${this.url}/pet`
+
   constructor(private http: HttpClient) {
   }
 
-  postPet(pet: Pet) {
-    return this.http.post('https://petstore.swagger.io/v2/pet', pet);
+  public postPet = (pet: Pet): Observable<Object> => this.http.post(`${this.controller}`, pet);
+
+  public getPetByStatus(status: string): Observable<Pet[]> {
+    // @ts-ignore
+    return this.http.get(`${this.controller}/findByStatus?status=${status}`);
   }
 
-  getPetByStatus(status: string) {
-    return this.http.get(`https://petstore.swagger.io/v2/pet/findByStatus?status=${status}`);
-  }
+  public deletePet = (id: number): Observable<Object> => this.http.delete(`${this.controller}/${id}`);
 
-  deletePet(id: number) {
-    return this.http.delete(`https://petstore.swagger.io/v2/pet/${id}`);
-  }
-
-  changePet(id: number, name: string, status: string) {
-   // return this.http.post(`https://petstore.swagger.io/v2/pet/${id}?name=${name}&status=${status}`);
-  }
+  public changePet = (body: Pet): Observable<Object> => this.http.put(`${this.controller}`, body);
 }

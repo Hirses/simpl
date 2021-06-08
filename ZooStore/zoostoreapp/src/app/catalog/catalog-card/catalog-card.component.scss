@@ -18,3 +18,9 @@
 .catalog__cardBtnMB{
   margin-bottom: 10px;
 }
+
+.card__btn-wraper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

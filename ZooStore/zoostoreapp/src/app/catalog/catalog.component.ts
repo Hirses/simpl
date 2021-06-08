@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Pet} from "../pet";
 import {HttpService,} from "../http.service";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-catalog',
@@ -10,34 +11,33 @@ import {NzModalService} from "ng-zorro-antd/modal";
   providers: [HttpService, NzModalService]
 })
 export class CatalogComponent implements OnInit{
-  creatingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
-  changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
-  removablePetId: number = 0;
-  isAddModalOpen: boolean = false;
-  isSearchModalOpen: boolean = false;
-  isChangeModalOpen: boolean = false;
-  donePostPet: boolean = false;
-  foundPets: Pet[] = [];
-  availablePets: Pet[] = [];
-  pendingPets: Pet[] = [];
-  soldPets: Pet[]  = [];
-  searchInputValue: string = '';
-  isFoundPets: boolean = false;
+  public creatingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
+  public changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
+  public removablePetId: number = 0;
+  public isAddModalOpen: boolean = false;
+  public isSearchModalOpen: boolean = false;
+  public isChangeModalOpen: boolean = false;
+  public foundPets: Pet[] = [];
+  public availablePets: Pet[] = [];
+  public pendingPets: Pet[] = [];
+  public soldPets: Pet[]  = [];
+  public searchInputValue: string = '';
+  public isFoundPets: boolean = false;
 
   constructor(private httpService: HttpService, private modal: NzModalService) {
   }
 
-  showModal() {
+  public showModal(): void {
     this.isAddModalOpen = true;
   }
 
-  closeModal() {
+  public closeModal(): void {
     this.isAddModalOpen = false;
     this.isSearchModalOpen = false;
     this.isChangeModalOpen = false;
   }
 
-  submit(pet: Pet) {
+  public submit(pet: Pet): void {
     this.httpService.postPet(pet).subscribe((data: any) => {
         this.creatingPet = data;
       },
@@ -47,58 +47,36 @@ export class CatalogComponent implements OnInit{
     this.closeModal()
   }
 
-  searchPet(word: string) {
-    this.isFoundPets = false;
-    this.foundPets = [];
-
-    if (word !== '') {
-
-      try {
-        let concatPets: Pet[] = this.foundPets = this.availablePets.concat(this.pendingPets).concat(this.soldPets);
-        this.foundPets = concatPets.filter(pet => (typeof pet.name === 'string') && (pet.name.toUpperCase().indexOf(word.toUpperCase()) > -1));
-      } catch (err) {
-        console.log(`something wrong...( ${err} )`);
-      }
-
-    }
-
-    if (this.foundPets.length === 0 || word === '') {
-      this.isFoundPets = true;
-    }
-
-    this.isSearchModalOpen = true;
-  }
-
-  reloadCatalog() {
-    this.httpService.getPetByStatus('available').subscribe(
-      (data: any) => this.availablePets = data,
+  private reloadCatalog(): void {
+    this.httpService.getPetByStatus('available').pipe(take(1)).subscribe(
+      (data: Pet[]) => this.availablePets = data,
       error => console.log(error),
       () => this.availablePets = this.availablePets.filter(pet => pet.id < 9.0071993e+15)
     );
-    this.httpService.getPetByStatus('pending').subscribe(
-      (data: any) => this.pendingPets = data,
+    this.httpService.getPetByStatus('pending').pipe(take(1)).subscribe(
+      (data: Pet[]) => this.pendingPets = data,
       error => console.log(error),
       () => this.pendingPets = this.pendingPets.filter(pet => pet.id < 9.0071993e+15)
     );
-    this.httpService.getPetByStatus('sold').subscribe(
-      (data: any) => this.soldPets = data,
+    this.httpService.getPetByStatus('sold').pipe(take(1)).subscribe(
+      (data: Pet[]) => this.soldPets = data,
       error => console.log(error),
       () => this.soldPets = this.soldPets.filter(pet => pet.id < 9.0071993e+15)
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.reloadCatalog()
   }
 
-  openChangeModal(pet: Pet) {
+  public openChangeModal(pet: Pet): void {
     this.changingPet.id = pet.id;
     this.changingPet.name = pet.name;
     this.changingPet.status = pet.status;
     this.isChangeModalOpen = true;
   }
 
-  openDeleteModal(id: number) {
+  public openDeleteModal(id: number): void {
     this.modal.confirm({
       nzTitle: 'Вы действительно хотите удалить животное?',
       nzOkText: 'Да',
@@ -109,8 +87,12 @@ export class CatalogComponent implements OnInit{
     });
   }
 
-  deletePet(id: number) {
+  private deletePet(id: number): void {
     this.httpService.deletePet(id).subscribe(() => this.reloadCatalog(),(error) => console.log(error))
   }
 
+  public changePet(pet: Pet): void {
+    this.httpService.changePet(pet).subscribe(() => this.reloadCatalog(), (error) => console.log(error))
+    this.closeModal()
+  }
 }

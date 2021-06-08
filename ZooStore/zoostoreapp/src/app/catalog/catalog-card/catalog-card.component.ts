@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {Pet} from "../pet";
+import {Pet} from "../../pet";
 
 @Component({
   selector: 'app-catalog-card',
@@ -14,12 +14,12 @@ export class CatalogCardComponent {
   @Output() onChange = new EventEmitter<Pet>();
   @Output() onDelete = new EventEmitter<number>();
 
-  changePet() {
+  public changePet(): void {
     let pet: Pet = new Pet(this.id, {id: 0, name: ''}, this.name, [''], [{id: 0, name: ''}], this.status)
     this.onChange.emit(pet);
   }
 
-  deletePet() {
+  public deletePet(): void {
     this.onDelete.emit(this.id);
   }
 
