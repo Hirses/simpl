@@ -1,0 +1,43 @@
+<nz-modal [(nzVisible)]="isModalOpen" nzTitle="Добавить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+  <ng-container *nzModalContent>
+    <form nz-form>
+      <h3>Основная информация</h3>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">ID:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="number" required="" name="id" [(ngModel)]="creatingPet.id">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Имя:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="name" [(ngModel)]="creatingPet.name">
+        </nz-form-control>
+      </nz-form-item>
+      <h3>Категория</h3>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">ID:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="number" required="" name="category-id" [(ngModel)]="creatingPet.category.id">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Категория:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="category-name" [(ngModel)]="creatingPet.category.name">
+        </nz-form-control>
+      </nz-form-item>
+      <h3>Статус</h3>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Статус:</nz-form-label>
+        <nz-select [nzPlaceHolder]="'В наличии'" name="status" [(ngModel)]="creatingPet.status">
+          <nz-option nzValue="available" nzLabel="В наличии"></nz-option>
+          <nz-option nzValue="pending" nzLabel="В ожидании"></nz-option>
+          <nz-option nzValue="sold" nzLabel="Продано"></nz-option>
+        </nz-select>
+      </nz-form-item>
+      <button nz-button nzType="primary" (click)="submit(creatingPet)" class="catalog__btn">Добавить</button>
+    </form>
+  </ng-container>
+  <div *nzModalFooter></div>
+</nz-modal>

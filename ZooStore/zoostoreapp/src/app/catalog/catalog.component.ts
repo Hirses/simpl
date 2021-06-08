@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Pet} from "../pet";
-import {HttpService,} from "../http.service";
+import {HttpService} from "../http.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {take} from "rxjs/operators";
 
@@ -11,18 +11,15 @@ import {take} from "rxjs/operators";
   providers: [HttpService, NzModalService]
 })
 export class CatalogComponent implements OnInit{
-  public creatingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
   public changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
   public removablePetId: number = 0;
   public isAddModalOpen: boolean = false;
   public isSearchModalOpen: boolean = false;
   public isChangeModalOpen: boolean = false;
-  public foundPets: Pet[] = [];
   public availablePets: Pet[] = [];
   public pendingPets: Pet[] = [];
   public soldPets: Pet[]  = [];
   public searchInputValue: string = '';
-  public isFoundPets: boolean = false;
 
   constructor(private httpService: HttpService, private modal: NzModalService) {
   }
@@ -31,20 +28,17 @@ export class CatalogComponent implements OnInit{
     this.isAddModalOpen = true;
   }
 
-  public closeModal(): void {
+  closeAfterDoneModal(): void {
+    this.reloadCatalog();
     this.isAddModalOpen = false;
     this.isSearchModalOpen = false;
     this.isChangeModalOpen = false;
   }
 
-  public submit(pet: Pet): void {
-    this.httpService.postPet(pet).subscribe((data: any) => {
-        this.creatingPet = data;
-      },
-      error => console.log(error),
-      () => this.reloadCatalog()
-    )
-    this.closeModal()
+  public closeModal(): void {
+    this.isAddModalOpen = false;
+    this.isSearchModalOpen = false;
+    this.isChangeModalOpen = false;
   }
 
   private reloadCatalog(): void {
@@ -90,9 +84,5 @@ export class CatalogComponent implements OnInit{
   private deletePet(id: number): void {
     this.httpService.deletePet(id).subscribe(() => this.reloadCatalog(),(error) => console.log(error))
   }
-
-  public changePet(pet: Pet): void {
-    this.httpService.changePet(pet).subscribe(() => this.reloadCatalog(), (error) => console.log(error))
-    this.closeModal()
-  }
+  
 }

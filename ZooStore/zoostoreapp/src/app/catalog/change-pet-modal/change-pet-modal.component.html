@@ -1,0 +1,29 @@
+<nz-modal [(nzVisible)]="isModalOpen" nzTitle="Изменить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+  <ng-container *nzModalContent>
+    <form nz-form>
+      <h3>Основная информация</h3>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">ID:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="number" required="" name="id" disabled [(ngModel)]="changingPet.id">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Имя:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="name" [(ngModel)]="changingPet.name">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Статус:</nz-form-label>
+        <nz-select [nzPlaceHolder]="changingPet.status" name="status" [(ngModel)]="changingPet.status">
+          <nz-option nzValue="available" nzLabel="В наличии"></nz-option>
+          <nz-option nzValue="pending" nzLabel="В ожидании"></nz-option>
+          <nz-option nzValue="sold" nzLabel="Продано"></nz-option>
+        </nz-select>
+      </nz-form-item>
+      <button nz-button nzType="primary" class="catalog__btn" (click)="changePet(changingPet)">Изменить</button>
+    </form>
+  </ng-container>
+  <div *nzModalFooter></div>
+</nz-modal>
