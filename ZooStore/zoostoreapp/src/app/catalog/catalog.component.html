@@ -12,16 +12,16 @@
   <div class="catalog__tabs">
     <nz-tabset [nzCentered]="true" [nzTabPosition]="'left'">
       <nz-tab nzTitle="В продаже">
-        <app-catalog-list [pets]="availablePets" [searchInputValue]="searchInputValue" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
+        <app-catalog-list [pets]="availablePets" [searchInputValue]="searchInputValue" (onOrder)="openOrderModal($event)" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
       </nz-tab>
       <nz-tab nzTitle="В ожидании">
-        <app-catalog-list [pets]="pendingPets" [searchInputValue]="searchInputValue" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
+        <app-catalog-list [pets]="pendingPets" [searchInputValue]="searchInputValue" (onOrder)="openOrderModal($event)" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
       </nz-tab>
       <nz-tab nzTitle="Продано">
-        <app-catalog-list [pets]="soldPets" [searchInputValue]="searchInputValue" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
+        <app-catalog-list [isNotSold]="isNotSold" [pets]="soldPets" [searchInputValue]="searchInputValue" (onOrder)="openOrderModal($event)" (onDelete)="openDeleteModal($event)" (onChange)="openChangeModal($event)"></app-catalog-list>
       </nz-tab>
     </nz-tabset>
   </div>
-  <app-add-pet-modal [isModalOpen]="isAddModalOpen" (post)="closeAfterDoneModal()" (close)="closeModal()"></app-add-pet-modal>
+  <app-add-pet-modal [isModalOpen]="isAddModalOpen" [selectValues]="selectValues" (post)="closeAfterDoneModal()" (close)="closeModal()"></app-add-pet-modal>
   <app-change-pet-modal [isModalOpen]="isChangeModalOpen" [changingPet]="changingPet" (post)="closeAfterDoneModal()" (close)="closeModal()"></app-change-pet-modal>
 </section>

@@ -12,14 +12,22 @@ import {take} from "rxjs/operators";
 })
 export class CatalogComponent implements OnInit{
   public changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
+  public orderingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
   public removablePetId: number = 0;
   public isAddModalOpen: boolean = false;
   public isSearchModalOpen: boolean = false;
   public isChangeModalOpen: boolean = false;
+  public isOrderModalOpen: boolean = false;
   public availablePets: Pet[] = [];
   public pendingPets: Pet[] = [];
   public soldPets: Pet[]  = [];
+  public isNotSold: boolean = false;
   public searchInputValue: string = '';
+  public selectValues: Map<string, string> = new Map([
+    ['available', 'В продаже'],
+    ['pending', 'В ожидании'],
+    ['sold', 'Продано']
+  ])
 
   constructor(private httpService: PetService, private modal: NzModalService) {
   }
@@ -85,4 +93,8 @@ export class CatalogComponent implements OnInit{
     this.httpService.deletePet(id).subscribe(() => this.reloadCatalog(),(error) => console.log(error))
   }
 
+  public openOrderModal(pet: Pet): void {
+    this.orderingPet = pet;
+    this.isOrderModalOpen = true;
+  }
 }

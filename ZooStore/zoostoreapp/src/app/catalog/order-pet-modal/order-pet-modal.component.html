@@ -1,0 +1,33 @@
+<nz-modal [(nzVisible)]="isModalOpen" nzTitle="Добавить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+  <ng-container *nzModalContent>
+    <form nz-form>
+      <h3>Основная информация</h3>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">ID заказа:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="number" required="" name="id" [(ngModel)]="order.id">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="name" disabled [(ngModel)]="order.petName">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="name" [(ngModel)]="order.quantity">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input type="text" required="" name="name" [(ngModel)]="order.shipDate">
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button nzType="primary" (click)="addOrder(order)" class="catalog__btn">Заказать</button>
+    </form>
+  </ng-container>
+  <div *nzModalFooter></div>
+</nz-modal>

@@ -1,5 +1,5 @@
 <div nz-row [nzGutter]="[16, 24]" class="catalog__grid">
   <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let item of getPets(pets)">
-    <app-catalog-card [name]="item.name" [id]="item.id" [status]="item.status" (onChange)="changePet($event)" (onDelete)="deletePet($event)"></app-catalog-card>
+    <app-catalog-card [isNotSold]="isNotSold" [name]="item.name" [id]="item.id" [status]="item.status" (onOrder)="orderPet($event)" (onChange)="changePet($event)" (onDelete)="deletePet($event)"></app-catalog-card>
   </div>
 </div>

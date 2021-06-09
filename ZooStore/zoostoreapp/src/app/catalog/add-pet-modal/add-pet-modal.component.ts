@@ -15,6 +15,7 @@ export class AddPetModalComponent {
   public creatingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
 
   @Input() isModalOpen: boolean = false;
+  @Input() selectValues: Map<string, string> = new Map();
 
   @Output() post = new EventEmitter<null>();
   @Output() close = new EventEmitter<null>();

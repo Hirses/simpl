@@ -8,9 +8,11 @@ import {Pet} from "../../pet";
 export class CatalogListComponent {
   @Input() pets : Pet[] = [];
   @Input() searchInputValue : string = '';
+  @Input() isNotSold: boolean = true;
 
   @Output() onChange = new EventEmitter<Pet>();
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onOrder = new EventEmitter<Pet>();
 
   public changePet(event : Pet): void {
       let pet: Pet = event;
@@ -23,5 +25,9 @@ export class CatalogListComponent {
 
   public getPets(pets : Pet[]): Pet[] {
     return pets.filter(pet => (typeof pet.name === "string")  && (pet.name.toUpperCase().includes(this.searchInputValue.toUpperCase())))
+  }
+
+  public orderPet(event: Pet): void {
+    this.onOrder.emit(event);
   }
 }
