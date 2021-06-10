@@ -18,9 +18,10 @@ import {PetService} from "../pet.service";
 import {AddPetModalComponent} from "./add-pet-modal/add-pet-modal.component";
 import {ChangePetModalComponent} from "./change-pet-modal/change-pet-modal.component";
 import {OrderPetModalComponent} from "./order-pet-modal/order-pet-modal.component";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 
 @NgModule({
-  imports: [FormsModule, HttpClientModule, BrowserAnimationsModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, NzTabsModule, NzButtonModule, RouterModule],
+    imports: [FormsModule, HttpClientModule, BrowserAnimationsModule, NzInputModule, NzIconModule, NzGridModule, NzModalModule, NzSelectModule, NzTabsModule, NzButtonModule, RouterModule, NzDatePickerModule],
   declarations: [CatalogComponent, CatalogCardComponent,  CatalogListComponent, AddPetModalComponent, ChangePetModalComponent, OrderPetModalComponent],
   bootstrap: [CatalogComponent],
   providers: [{provide: NZ_I18N, useValue: ru_RU}, PetService]

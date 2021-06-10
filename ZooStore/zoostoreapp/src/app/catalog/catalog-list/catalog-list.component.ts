@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Pet} from "../../pet";
+import {Order} from "../../order";
 
 @Component({
   selector: 'app-catalog-list',
@@ -12,11 +13,10 @@ export class CatalogListComponent {
 
   @Output() onChange = new EventEmitter<Pet>();
   @Output() onDelete = new EventEmitter<number>();
-  @Output() onOrder = new EventEmitter<Pet>();
+  @Output() onOrder = new EventEmitter<Order>();
 
   public changePet(event : Pet): void {
-      let pet: Pet = event;
-    this.onChange.emit(pet);
+    this.onChange.emit(event);
   }
 
   public deletePet(event : number): void {
@@ -27,7 +27,7 @@ export class CatalogListComponent {
     return pets.filter(pet => (typeof pet.name === "string")  && (pet.name.toUpperCase().includes(this.searchInputValue.toUpperCase())))
   }
 
-  public orderPet(event: Pet): void {
+  public orderPet(event: Order): void {
     this.onOrder.emit(event);
   }
 }

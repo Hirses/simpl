@@ -1,4 +1,6 @@
-<h2>Список заказов</h2>
-<div >
-
-</div>
+<section class="order-list">
+  <h2>Список заказов</h2>
+  <div *ngFor="let order of orders">
+    <app-order-card [order]="order" (onEvent)="getOrders()"></app-order-card>
+  </div>
+</section>

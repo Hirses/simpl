@@ -1,9 +1,9 @@
-<nz-card nzTitle="Card title" [nzExtra]="extraTemplate">
-  <p>Card content</p>
-  <p>Card content</p>
-  <p>Card content</p>
+<nz-card nzTitle="Заказ № {{order.id}}" [nzExtra]="extraTemplate">
+  <p>Имя животного: {{order.petName}}</p>
+  <p>Колличество: {{order.quantity}}</p>
+  <p>Дата доставки: {{order.shipDate}}</p>
 </nz-card>
 <ng-template #extraTemplate>
   <button nz-button nzType="dashed">Изменить</button>
-  <button nz-button nzType="danger">Удалить</button>
+  <button nz-button nzType="danger" (click)="delete()">Удалить</button>
 </ng-template>

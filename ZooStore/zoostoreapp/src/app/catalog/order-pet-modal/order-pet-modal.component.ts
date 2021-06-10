@@ -1,21 +1,18 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {Pet} from "../../pet";
 import {Order} from "../../order";
 import {OrderService} from "../../order.service";
 
 
 @Component({
   selector: 'app-order-pet-modal',
-  styleUrls: ['order-pet-modal.scss'],
+  styleUrls: ['order-pet-moda.componentl.scss'],
   templateUrl: 'order-pet-modal.component.html'
 })
 export class OrderPetModalComponent {
-  @Input() orderingPet: Pet | undefined;
+  @Input() orderingPet: Order = new Order();
   @Input() isModalOpen: boolean = false;
 
   @Output() onClose = new EventEmitter<null>()
-
-  public order : Order = new Order()
 
   constructor(private orderService: OrderService) {
   }

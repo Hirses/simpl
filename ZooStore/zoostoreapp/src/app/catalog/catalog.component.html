@@ -24,4 +24,5 @@
   </div>
   <app-add-pet-modal [isModalOpen]="isAddModalOpen" [selectValues]="selectValues" (post)="closeAfterDoneModal()" (close)="closeModal()"></app-add-pet-modal>
   <app-change-pet-modal [isModalOpen]="isChangeModalOpen" [changingPet]="changingPet" (post)="closeAfterDoneModal()" (close)="closeModal()"></app-change-pet-modal>
+  <app-order-pet-modal [isModalOpen]="isOrderModalOpen" [orderingPet]="orderingPet" (onClose)="closeModal()"></app-order-pet-modal>
 </section>

@@ -1,32 +1,25 @@
 <nz-modal [(nzVisible)]="isModalOpen" nzTitle="Добавить животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
   <ng-container *nzModalContent>
     <form nz-form>
-      <h3>Основная информация</h3>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="6">ID заказа:</nz-form-label>
-        <nz-form-control [nzSpan]="14">
-          <input nz-input type="number" required="" name="id" [(ngModel)]="order.id">
-        </nz-form-control>
-      </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input nz-input type="text" required="" name="name" disabled [(ngModel)]="order.petName">
+          <input nz-input type="text" required="" name="petName" disabled [(ngModel)]="orderingPet.petName">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
+        <nz-form-label [nzSpan]="6">Количество:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input nz-input type="text" required="" name="name" [(ngModel)]="order.quantity">
+          <input nz-input type="number" required="" name="quantity" [(ngModel)]="orderingPet.quantity">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
+        <nz-form-label [nzSpan]="6">Дата доставки:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input nz-input type="text" required="" name="name" [(ngModel)]="order.shipDate">
+          <nz-date-picker required="" name="shipDate" [(ngModel)]="orderingPet.shipDate"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
-      <button nz-button nzType="primary" (click)="addOrder(order)" class="catalog__btn">Заказать</button>
+      <button nz-button nzType="primary" (click)="addOrder(orderingPet)" class="catalog__btn">Заказать</button>
     </form>
   </ng-container>
   <div *nzModalFooter></div>

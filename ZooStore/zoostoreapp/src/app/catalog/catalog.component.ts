@@ -3,6 +3,7 @@ import {Pet} from "../pet";
 import {PetService} from "../pet.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {take} from "rxjs/operators";
+import {Order} from "../order";
 
 @Component({
   selector: 'app-catalog',
@@ -12,7 +13,7 @@ import {take} from "rxjs/operators";
 })
 export class CatalogComponent implements OnInit{
   public changingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
-  public orderingPet: Pet = new Pet(0, {id: 0, name: ''}, '', [''], [{id: 0, name: ''}], '');
+  public orderingPet: Order = new Order(1, '', 1, new Date, 'placed', true);
   public removablePetId: number = 0;
   public isAddModalOpen: boolean = false;
   public isSearchModalOpen: boolean = false;
@@ -47,6 +48,7 @@ export class CatalogComponent implements OnInit{
     this.isAddModalOpen = false;
     this.isSearchModalOpen = false;
     this.isChangeModalOpen = false;
+    this.isOrderModalOpen = false;
   }
 
   private reloadCatalog(): void {
@@ -93,8 +95,8 @@ export class CatalogComponent implements OnInit{
     this.httpService.deletePet(id).subscribe(() => this.reloadCatalog(),(error) => console.log(error))
   }
 
-  public openOrderModal(pet: Pet): void {
-    this.orderingPet = pet;
+  public openOrderModal(orderingPet: Order): void {
+    this.orderingPet = orderingPet;
     this.isOrderModalOpen = true;
   }
 }

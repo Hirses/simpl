@@ -20,40 +20,6 @@
   width: 300px;
 }
 
-.catalog__btn {
-  display: block;
-  margin: 40px auto;
-}
-
 .catalog__tabs {
   margin-top: 60px;
-}
-
-.catalog__card {
-  height: 250px;
-  padding: 20px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  &_green {
-    background-color: white;
-  }
-
-  &_yellow {
-    background-color: yellow;
-  }
-
-  &_gray {
-    background-color: gray;
-  }
-}
-
-.catalog__cardName {
-  font-size: 22px;
-}
-
-.catalog__cardBtnMB {
-  margin-bottom: 10px;
 }
