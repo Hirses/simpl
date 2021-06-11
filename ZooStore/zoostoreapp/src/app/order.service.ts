@@ -32,4 +32,8 @@ export class OrderService {
     return this.getCounter()
   }
 
+  public changeOrder(order: Order, changedOrder: Order): void {
+    this.orders[this.orders.findIndex((element: Order) => element.id === order.id)] = changedOrder;
+  }
+
 }

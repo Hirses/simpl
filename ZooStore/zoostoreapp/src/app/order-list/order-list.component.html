@@ -1,6 +1,15 @@
 <section class="order-list">
   <h2>Список заказов</h2>
-  <div *ngFor="let order of orders">
-    <app-order-card [order]="order" (onEvent)="getOrders()"></app-order-card>
+  <div class="catalog__control">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" class="catalog__search">
+      <input type="text" nz-input placeholder="Найти заказ" [(ngModel)]="searchInputValue"/>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary"><i nz-icon nzType="search"></i></button>
+      </ng-template>
+    </nz-input-group>
   </div>
+  <div *ngFor="let order of searchOrders()">
+    <app-order-card [order]="order" (onDelete)="getOrders()" (onChange)="changeOrder($event)"></app-order-card>
+  </div>
+  <app-change-order-modal [isModalOpen]="isChangeModalOpen" [changedOrder]="changingOrder" [order]="changingOrder" (onClose)="getOrders()"></app-change-order-modal>
 </section>

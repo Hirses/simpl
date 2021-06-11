@@ -1,25 +1,25 @@
-<nz-modal [(nzVisible)]="isModalOpen" nzTitle="Заказать животное" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
+<nz-modal [(nzVisible)]="isModalOpen" nzTitle="Изменить заказ" (nzOnCancel)="closeModal()" (nzOnOk)="closeModal()" nzOkLoading="false">
   <ng-container *nzModalContent>
     <form nz-form>
       <nz-form-item>
         <nz-form-label [nzSpan]="6">Имя питомца:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input nz-input type="text" required="" name="petName" disabled [(ngModel)]="orderingPet.petName">
+          <input nz-input type="text" required="" name="petName" disabled [(ngModel)]="changedOrder.petName">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="6">Количество:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input nz-input type="number" required="" name="quantity" [(ngModel)]="orderingPet.quantity">
+          <input nz-input type="number" required="" name="quantity" [(ngModel)]="changedOrder.quantity">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="6">Дата доставки:</nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <nz-date-picker required="" name="shipDate" [(ngModel)]="orderingPet.shipDate"></nz-date-picker>
+          <nz-date-picker required="" name="shipDate" [(ngModel)]="changedOrder.shipDate"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
-      <button nz-button nzType="primary" (click)="addOrder(orderingPet)" class="catalog__btn">Заказать</button>
+      <button nz-button nzType="primary" (click)="change()" class="catalog__btn">Заказать</button>
     </form>
   </ng-container>
   <div *nzModalFooter></div>

@@ -9,11 +9,15 @@ import {Order} from "../order";
 })
 export class OrderListComponent implements OnInit{
   public orders: Order[] = [];
+  public changingOrder: Order = new Order();
+  public isChangeModalOpen: boolean = false;
+  public searchInputValue: string = '';
 
   constructor(private orderService: OrderService) {
   }
 
-  getOrders() {
+  public getOrders() {
+    this.isChangeModalOpen = false;
     this.orders = this.orderService.getOrders();
   }
 
@@ -21,5 +25,13 @@ export class OrderListComponent implements OnInit{
     this.getOrders();
   }
 
+  public changeOrder(event: Order): void {
+    this.changingOrder = new Order(event.id, event.petName, event.quantity, event.shipDate, event.status, event.complete);
+    this.isChangeModalOpen = true;
+  }
+
+  public searchOrders(): Order[] {
+    return this.orders.filter(order => order.id.toString().includes(this.searchInputValue));
+  }
 
 }

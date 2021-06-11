@@ -13,10 +13,15 @@ export class OrderCardComponent {
 
   @Input() order: Order = new Order();
 
-  @Output() onEvent = new EventEmitter<null>();
+  @Output() onDelete = new EventEmitter<null>();
+  @Output() onChange = new EventEmitter<Order>();
 
   public delete(): void {
     this.orderService.deleteOrder(this.order);
-    this.onEvent.emit();
+    this.onDelete.emit();
+  }
+
+  public change(): void {
+    this.onChange.emit(this.order)
   }
 }
